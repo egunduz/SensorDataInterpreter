@@ -1,7 +1,6 @@
 package com.demo.SensorDataInterpreter.entity;
 
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 

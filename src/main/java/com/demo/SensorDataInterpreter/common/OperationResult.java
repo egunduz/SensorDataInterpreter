@@ -22,4 +22,14 @@ public class OperationResult {
         this.success = success;
         this.message = message;
     }
+
+    // Factory method for creating a success operation result
+    public static OperationResult success() {
+        return new OperationResult(true);
+    }
+
+    // Factory method for creating a failed operation result with a message
+    public static OperationResult failure(String message) {
+        return new OperationResult(false, message);
+    }
 }
