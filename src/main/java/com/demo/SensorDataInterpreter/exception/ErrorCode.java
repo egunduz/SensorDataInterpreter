@@ -2,6 +2,9 @@ package com.demo.SensorDataInterpreter.exception;
 
 import lombok.Getter;
 
+/**
+ * Error codes constants
+ */
 @Getter
 public enum ErrorCode {
     SENSOR_DATA_SERIALIZATION_ERROR("SENSOR_DATA_SERIALIZATION_ERROR", "Failed to serialize sensor data"),

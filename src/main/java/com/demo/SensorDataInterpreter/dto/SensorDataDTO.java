@@ -5,6 +5,10 @@ import lombok.Data;
 
 import java.util.List;
 
+/**
+ * Data Transfer Object for sensor data.
+ * This class is used to transfer sensor data between different layers of the application.
+ */
 @Data
 public class SensorDataDTO {
     private String id;

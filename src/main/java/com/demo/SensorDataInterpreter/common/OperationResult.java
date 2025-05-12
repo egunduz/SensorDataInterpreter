@@ -8,7 +8,6 @@ import lombok.Data;
  * It contains a success flag and an optional message.
  */
 @Data
-@Builder
 public class OperationResult {
     private final boolean success;
     private final String message;

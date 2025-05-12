@@ -1,8 +1,7 @@
 package com.demo.SensorDataInterpreter.exception;
 
 import lombok.Getter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -24,9 +23,9 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Getter
 @ControllerAdvice
+@Slf4j
 public class GlobalExceptionHandler {
 
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
     private final Map<String, Integer> exceptionCache = new ConcurrentHashMap<>();
 
     @ExceptionHandler(AppException.class)
@@ -60,7 +59,7 @@ public class GlobalExceptionHandler {
 
     /**
      * Caches the exception count for a specific error code.
-     *
+     * This method is used to track the frequency of exceptions
      * @param errorCode The error code to cache.
      */
     private void cacheException(String errorCode) {

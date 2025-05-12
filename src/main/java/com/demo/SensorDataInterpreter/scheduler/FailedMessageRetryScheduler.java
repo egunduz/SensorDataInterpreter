@@ -19,7 +19,7 @@ public class FailedMessageRetryScheduler {
 
     @Scheduled(fixedRate = 100000) // Runs every 10 seconds
     public void retryFailedMessages() {
-        int successCount = retryService.reprocess();
+        int successCount = retryService.reProcess();
         log.info("Retried failed messages. Successfully processed: {}", successCount);
     }
 }

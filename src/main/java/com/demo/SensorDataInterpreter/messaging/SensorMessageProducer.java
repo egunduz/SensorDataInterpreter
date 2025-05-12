@@ -7,7 +7,8 @@ import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
 
 /**
- * This class is responsible for sending sensor data messages to a JMS queue.
+ * This class is responsible for sending sensor data messages to the centralized queue.
+ * Normally this class is not the part of the assessment, but we need to simulate sensor data
  */
 @Service
 public class SensorMessageProducer {

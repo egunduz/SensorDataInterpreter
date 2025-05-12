@@ -9,7 +9,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Entity class representing metric threshold for alert generation.
+ * Entity class representing metric threshold/configuration parameters.
+ * Those parameters are used to determine the health status of a metric.
+ * And generate alerts if the metric is out of the defined range.
+ * Check MetricCalculationService for more details.
+ * And also use h2-console to view the data in the database.
  */
 @Entity
 @Table(name = "metric_thresholds")

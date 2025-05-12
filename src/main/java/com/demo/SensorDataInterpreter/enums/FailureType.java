@@ -1,5 +1,8 @@
 package com.demo.SensorDataInterpreter.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum FailureType {
     PARSING_FAILURE("PARSING_FAILURE"),
     PROCESSING_FAILURE("PROCESSING_FAILURE"),
@@ -7,8 +10,5 @@ public enum FailureType {
     private final String value;
     FailureType(String value) {
         this.value = value;
-    }
-    public String getValue() {
-        return value;
     }
 }

@@ -6,6 +6,11 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * Entity class representing metric alerts generated based on threshold conditions.
+ * We will list those alerts in the UI.
+ * Table can also be viewed in h2-console.
+ */
 @Entity
 @Data
 @Table(name = "metric_alerts")

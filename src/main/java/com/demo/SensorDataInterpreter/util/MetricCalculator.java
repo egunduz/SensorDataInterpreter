@@ -1,9 +1,8 @@
 package com.demo.SensorDataInterpreter.util;
 
-import com.demo.SensorDataInterpreter.common.OperationResult;
 import com.demo.SensorDataInterpreter.dto.MetricHealthResult;
 import com.demo.SensorDataInterpreter.entity.MetricThresholdEntity;
-import com.demo.SensorDataInterpreter.entity.SensorStatisticalEntity;
+import com.demo.SensorDataInterpreter.entity.SensorMetricsEntity;
 import com.demo.SensorDataInterpreter.enums.MetricThresholdType;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +21,7 @@ public class MetricCalculator {
      * @param threshold Metric threshold entity
      * @return Metric health result
      */
-    public static MetricHealthResult calculateHealthiness(SensorStatisticalEntity prevStat, SensorStatisticalEntity newStat, MetricThresholdEntity threshold) {
+    public static MetricHealthResult calculateHealthiness(SensorMetricsEntity prevStat, SensorMetricsEntity newStat, MetricThresholdEntity threshold) {
         String metricName = threshold.getMetric().name();
         Double oldValue = null;
         Double newValue = null;
