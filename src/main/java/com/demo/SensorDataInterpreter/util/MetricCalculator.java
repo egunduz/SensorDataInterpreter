@@ -22,13 +22,18 @@ public class MetricCalculator {
      * @return Metric health result
      */
     public static MetricHealthResult calculateHealthiness(SensorMetricsEntity prevStat, SensorMetricsEntity newStat, MetricThresholdEntity threshold) {
+        if (threshold.getMetric() == null) {
+            log.warn("Metric is null, cannot calculate healthiness");
+            return MetricHealthResult.healthy("Unknown");
+        }
+
         String metricName = threshold.getMetric().name();
         Double oldValue = null;
         Double newValue = null;
         long timeWindowMinutes = 0;
 
         // calculate time change between the two status
-        if (prevStat != null && newStat != null) {
+        if (prevStat != null && newStat != null && prevStat.getTimestamp() != null && newStat.getTimestamp() != null) {
             timeWindowMinutes = Duration.between(prevStat.getTimestamp(),newStat.getTimestamp()).toMinutes();
         }
 
@@ -82,7 +87,9 @@ public class MetricCalculator {
         }
 
         // Check if the change exceeds the threshold
-        if (change > threshold.getChangeThreshold()
+        Double thresholdValue = threshold.getChangeThreshold();
+        if (thresholdValue != null
+                && change > thresholdValue
                 && timeWindowMinutes > threshold.getTimeWindowMinutes()) {
 
             return MetricHealthResult.critical(
@@ -92,7 +99,7 @@ public class MetricCalculator {
                             timeWindowMinutes,
                     "Threshold exceeded in time window: " + timeWindowMinutes
                             + ". Change: " + change
-                            + ". Threshold: " + threshold.getChangeThreshold());
+                            + ". Threshold: " + thresholdValue);
 
         }
 
