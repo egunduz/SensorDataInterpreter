@@ -462,3 +462,6 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/abidi/O
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 67 more
+2025-05-13 23:38:47.848521+03:00 jdbc[14]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE [*]* FROM METRIC_ALERTS"; expected "identifier"; SQL statement:
+DELETE * FROM METRIC_ALERTS [42001-224]

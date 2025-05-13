@@ -19,7 +19,10 @@
             <button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location" type="button" role="tab">Location History</button>
         </li>
         <li class="nav-item" role="presentation">
-            <button class="nav-link" id="sensor-tab" data-bs-toggle="tab" data-bs-target="#sensors" type="button" role="tab">Sensor</button>
+            <button class="nav-link" id="sensor-tab" data-bs-toggle="tab" data-bs-target="#sensors" type="button" role="tab">Sensor ⚡</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="config-tab" data-bs-toggle="tab" data-bs-target="#config" type="button" role="tab">Environment</button>
         </li>
     </ul>
     <div class="tab-content mt-3" id="myTabContent">
@@ -38,6 +41,10 @@
         <div class="tab-pane fade" id="sensors" role="tabpanel">
             <!-- Thymeleaf Sensor Table -->
             <div th:replace="~{fragments/sensors :: sensorsFragment}"></div>
+        </div>
+        <div class="tab-pane fade" id="config" role="tabpanel">
+            <!-- Thymeleaf Sensor Table -->
+            <div th:replace="~{fragments/config :: configFragment}"></div>
         </div>
     </div>
 </div>

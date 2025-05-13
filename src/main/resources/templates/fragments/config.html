@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="configFragment">
+    <div class="card mt-3">
+        <div class="card-body">
+            <p><strong>H2 Database:</strong> Visit <a href="/h2-console">h2-console</a></p>
+            <p><strong>MongoDB:</strong> Use Mongo Compass to connect. URL= mongodb://localhost:27017/sensorStatisticalDB </span></p>
+            <p><strong>ActiveMQ Queue:</strong> URL = vm://localhost, Queue: <span th:text="central-message-queue"></span></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
