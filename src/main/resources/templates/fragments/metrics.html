@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div th:fragment="metricsFragment">
+    <h4>Metrics</h4>
+    <table class="table table-bordered table-sm">
+        <thead>
+        <tr>
+            <th>Source</th>
+            <th>Temperature</th>
+            <th>Air Pressure</th>
+            <th>Humidity</th>
+            <th>Light Level</th>
+            <th>Battery Charge</th>
+            <th>Battery Voltage</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="metric : ${metrics}">
+            <td th:text="${metric?.type}"></td>
+            <td th:text="${metric?.temperature}"></td>
+            <td th:text="${metric?.airPressure}"></td>
+            <td th:text="${metric?.humidity}"></td>
+            <td th:text="${metric?.lightLevel}"></td>
+            <td th:text="${metric?.batteryCharge}"></td>
+            <td th:text="${metric?.batteryVoltage}"></td>
+            <td th:text="${metric?.timestamp}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

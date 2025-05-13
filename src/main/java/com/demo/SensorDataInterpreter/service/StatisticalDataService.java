@@ -42,4 +42,14 @@ public class StatisticalDataService implements SensorDataProcessor {
                 .map(LocationHistoryMapper::map)
                 .toList();
     }
+
+    public List<LocationHistoryResponseDTO> getAllLocationHistory() {
+        var statusChanges = operationalRepository.findAll();
+
+        // convert the entity to response DTO
+        return statusChanges.stream()
+                .filter(x-> x.getEventLocation() != null)
+                .map(LocationHistoryMapper::map)
+                .toList();
+    }
 }

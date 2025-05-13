@@ -31,7 +31,7 @@ import java.util.List;
 public class OperationalDataService implements SensorDataProcessor {
     private final SensorMetricsRepository sensorStatisticalRepository;
     private final MetricThresholdRepository thresholdRepository;
-    private final MetricAlertRepository alertRepository;
+    private final MetricAlertService alertService;
 
     @Override
     public OperationResult process(SensorDataDTO sensorData) {
@@ -58,9 +58,10 @@ public class OperationalDataService implements SensorDataProcessor {
                         alert.setOldValue(healthiness.getPreviousValue());
                         alert.setNewValue(healthiness.getCurrentValue());
                         alert.setTimeWindowInMinutes(healthiness.getTimeWindowInMinutes());
-                        alert.setMessage(healthiness.getStatus() + ": " + healthiness.getDiagnosis());
+                        alert.setLevel(healthiness.getStatus().name());
+                        alert.setMessage(healthiness.getDiagnosis());
 
-                        alertRepository.save(alert);
+                        alertService.save(alert);
                     }
                 } catch (Exception e) {
                     // We can tolerate this error. Log it and continue with the next metric

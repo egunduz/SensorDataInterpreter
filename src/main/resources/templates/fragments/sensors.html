@@ -1,0 +1,90 @@
+<div th:fragment="sensorsFragment">
+    <div class="container mt-4">
+        <h4>Sensor Data Generator</h4>
+
+        <div class="mb-3">
+            <label for="sensorJsonInput" class="form-label">Message JSON</label>
+            <textarea class="form-control" id="sensorJsonInput" rows="12"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <button class="btn btn-primary me-2" onclick="sendSensorData()">Send</button>
+            <button class="btn btn-secondary" onclick="generateRandomSensorData()">Generate Random Data</button>
+        </div>
+
+        <div id="sensorResponseArea" class="mt-3 alert alert-secondary d-none" role="alert"></div>
+    </div>
+
+    <script>
+        <!-- send data to api -->
+        function sendSensorData() {
+            const input = document.getElementById('sensorJsonInput').value;
+            const responseArea = document.getElementById('sensorResponseArea');
+
+            let requestSon = {};
+            try {
+                requestSon = JSON.parse(input.trim());
+            } catch (e) {
+                responseArea.classList.remove("d-none", "alert-secondary");
+                responseArea.classList.add("alert-danger");
+                responseArea.innerText = "Invalid JSON: " + e.message;
+                return;
+            }
+
+            fetch('/api/sensors', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestSon)
+            })
+                .then(response => response.text())
+                .then(msg => {
+                    responseArea.classList.remove("d-none", "alert-danger");
+                    responseArea.classList.add("alert-success");
+                    responseArea.innerHTML = '<pre>' + msg + '</pre>';
+                })
+                .catch(error => {
+                    responseArea.classList.remove("d-none", "alert-success");
+                    responseArea.classList.add("alert-danger");
+                    responseArea.innerText = "Error: " + error;
+                });
+        }
+
+        <!-- generate random sensor data json -->
+        function generateRandomSensorData() {
+            const randomData = {
+                id: "sensor-" + Math.floor(Math.random() * 1000),
+                type: "HUD" + (20 + Math.floor(Math.random() * 10)),
+                temperature: (Math.random() * 40).toFixed(2),
+                airPressure: (980 + Math.random() * 40).toFixed(2),
+                humidity: (Math.random() * 100).toFixed(2),
+                lightLevel: (Math.random() * 1000).toFixed(2),
+                batteryCharge: (Math.random() * 100).toFixed(2),
+                batteryVoltage: (20 + Math.random() * 10).toFixed(2),
+                status_changes: [
+                    {
+                        device_id: "device-" + Math.floor(Math.random() * 1000),
+                        vehicle_id: "vehicle-" + Math.floor(Math.random() * 1000),
+                        vehicle_type: "car",
+                        propulsion_type: ["electric"],
+                        event_type: "status_update",
+                        event_type_reason: "normal_operation",
+                        event_timen: Math.floor(Date.now() / 1000),
+                        event_location: {
+                            geometry: {
+                                type: "Point",
+                                coordinates: [
+                                    (Math.random() * 180 - 90).toFixed(6),
+                                    (Math.random() * 360 - 180).toFixed(6)
+                                ]
+                            }
+                        }
+                    }
+                ]
+            };
+
+            document.getElementById('sensorJsonInput').value = JSON.stringify(randomData, null, 2);
+        }
+    </script>
+</div>

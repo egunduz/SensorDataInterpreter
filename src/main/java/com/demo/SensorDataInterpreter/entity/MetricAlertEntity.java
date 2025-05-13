@@ -26,6 +26,7 @@ public class MetricAlertEntity {
     private Double oldValue;
     private Double newValue;
     private Long timeWindowInMinutes;
+    private String level; // warning, critical
     private String message;
 
     private LocalDateTime createdAt = LocalDateTime.now();

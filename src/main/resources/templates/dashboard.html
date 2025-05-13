@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sensor Data Interpreter Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <meta http-equiv="refresh" content="300" /> <!-- Optional: refresh page every 60 seconds -->
+</head>
+<body>
+<div class="container mt-4">
+    <h5 class="bg-body-secondary mb-3 p-2" >Sensor Data Interpreter Dashboard</h5>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="metrics-tab" data-bs-toggle="tab" data-bs-target="#metrics" type="button" role="tab">Metrics</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="alerts-tab" data-bs-toggle="tab" data-bs-target="#alerts" type="button" role="tab">Alerts</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="location-tab" data-bs-toggle="tab" data-bs-target="#location" type="button" role="tab">Location History</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="sensor-tab" data-bs-toggle="tab" data-bs-target="#sensors" type="button" role="tab">Sensor</button>
+        </li>
+    </ul>
+    <div class="tab-content mt-3" id="myTabContent">
+        <div class="tab-pane fade show active" id="metrics" role="tabpanel">
+            <!-- Thymeleaf Metrics Table -->
+            <div th:replace="~{fragments/metrics :: metricsFragment}"></div>
+        </div>
+        <div class="tab-pane fade" id="alerts" role="tabpanel">
+            <!-- Thymeleaf Alerts Table -->
+            <div th:replace="~{fragments/alerts :: alertsFragment}"></div>
+        </div>
+        <div class="tab-pane fade" id="location" role="tabpanel">
+            <!-- Thymeleaf Location History Table -->
+            <div th:replace="~{fragments/location-history :: locationHistoryFragment}"></div>
+        </div>
+        <div class="tab-pane fade" id="sensors" role="tabpanel">
+            <!-- Thymeleaf Sensor Table -->
+            <div th:replace="~{fragments/sensors :: sensorsFragment}"></div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+</body>
+</html>
+

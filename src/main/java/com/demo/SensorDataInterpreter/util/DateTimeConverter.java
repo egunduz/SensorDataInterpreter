@@ -1,8 +1,6 @@
 package com.demo.SensorDataInterpreter.util;
 
-import java.time.DateTimeException;
-import java.time.Instant;
-import java.time.ZoneOffset;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -15,7 +13,7 @@ public class DateTimeConverter {
         try {
             return Instant.parse(isoDateString).getEpochSecond();
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid ISO format: " + isoDateString, e);
+            return fromLocalTime(isoDateString);
         }
     }
 
@@ -26,6 +24,15 @@ public class DateTimeConverter {
                     .format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         } catch (DateTimeException e) {
             throw new IllegalArgumentException("Could not convert instant to ISO date: " + dateInSeconds, e);
+        }
+    }
+
+    public static long fromLocalTime(String date) {
+        try {
+            // Convert to Instant (assuming system default timezone)
+            return LocalDateTime.parse(date).atZone(ZoneId.systemDefault()).toInstant().getEpochSecond();
+        } catch (DateTimeException e) {
+            throw new IllegalArgumentException("Invalid Date format: " + date, e);
         }
     }
 }

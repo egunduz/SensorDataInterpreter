@@ -21,8 +21,15 @@ public class LocationHistoryController {
 
     private final StatisticalDataService service;
 
-    @PostMapping("/history")
-    public List<LocationHistoryResponseDTO> get(@Valid @RequestBody LocationHistoryRequestDTO requestDTO) {
-        return service.getDeviceLocationHistory(requestDTO);
+    @GetMapping("/history/all")
+    public List<LocationHistoryResponseDTO> getAll() {
+        return service.getAllLocationHistory();
+    }
+
+    @GetMapping("/history")
+    public List<LocationHistoryResponseDTO> get(@RequestParam String deviceId,
+                                                @RequestParam String startDate,
+                                                @RequestParam String endDate) {
+        return service.getDeviceLocationHistory(new LocationHistoryRequestDTO(deviceId, startDate, endDate));
     }
 }

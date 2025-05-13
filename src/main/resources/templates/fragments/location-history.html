@@ -1,0 +1,101 @@
+<div th:fragment="locationHistoryFragment">
+    <form id="historyForm" class="row g-3" onsubmit="return getLocationHistoryByDevice(event)">
+        <div class="col-md-3">
+            <label for="deviceId" class="form-label">Device ID</label>
+            <input type="text" class="form-control" id="deviceId">
+        </div>
+        <div class="col-md-3">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input type="text" class="form-control" id="startDate" placeholder="e.g. 2025-05-10T00:00">
+        </div>
+        <div class="col-md-3">
+            <label for="endDate" class="form-label">End Date</label>
+            <input type="text" class="form-control" id="endDate" placeholder="e.g. 2025-05-13T23:59">
+        </div>
+        <div class="col-md-3 align-self-end">
+            <button type="submit" class="btn btn-primary">Fetch</button>
+            <button onclick="getAllHistory()" class="btn btn-secondary">Or Fetch All</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <table class="table table-bordered mt-3" id="historyTable">
+        <thead>
+        <tr>
+            <th>Device ID</th>
+            <th>Location</th>
+            <th>Timestamp</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Filled by AJAX -->
+        </tbody>
+    </table>
+
+    <script>
+        function getAllHistory(){
+            $.ajax({
+                url: '/api/locations/history/all',
+                method: 'GET',
+                data: {},
+                success: function (data) {
+                    const tbody = $('#historyTable tbody');
+                    tbody.empty();
+
+                    if (data.length === 0) {
+                        tbody.append('<tr><td colspan="3">No records found.</td></tr>');
+                        return;
+                    }
+
+                    data.forEach(item => {
+                        tbody.append(`<tr>
+                                <td>${item?.deviceId}</td>
+                                <td>${JSON.stringify(item?.eventLocation)}</td>
+                                <td>${item?.eventTime}</td>
+                            </tr>`);
+                    });
+                },
+                error: function () {
+                    alert('Error fetching device location history.');
+                }
+            });
+        }
+        function getLocationHistoryByDevice(event) {
+                event.preventDefault();
+                const deviceId = $('#deviceId').val();
+                const start = $('#startDate').val();
+                const end = $('#endDate').val();
+
+                $.ajax({
+                    url: '/api/locations/history',
+                    method: 'GET',
+                    data: {
+                        deviceId: deviceId,
+                        startDate: start,
+                        endDate: end
+                    },
+                    success: function (data) {
+                        const tbody = $('#historyTable tbody');
+                        tbody.empty();
+
+                        if (data.length === 0) {
+                            tbody.append('<tr><td colspan="3">No records found.</td></tr>');
+                            return;
+                        }
+
+                        data.forEach(item => {
+                            tbody.append(`<tr>
+                                <td>${item?.eventTime}</td>
+                                <td>${item?.deviceId}</td>
+                                <td>${item?.deviceId}</td>
+                            </tr>`);
+                        });
+                    },
+                    error: function () {
+                        alert('Error fetching device location history.');
+                    }
+                });
+        }
+    </script>
+</div>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div th:fragment="alertsFragment">
+    <h4>Alerts</h4>
+    <table class="table table-bordered table-sm">
+        <thead>
+        <tr>
+            <th>Metric</th>
+            <th>Previous Value</th>
+            <th>New Value</th>
+            <th>Time Window (Minutes)</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="alert : ${alerts}">
+            <td th:text="${alert?.metric}"></td>
+            <td th:text="${alert?.oldValue}"></td>
+            <td th:text="${alert?.newValue}"></td>
+            <td th:text="${alert?.timeWindowInMinutes}"></td>
+            <td th:text="${alert?.message}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
