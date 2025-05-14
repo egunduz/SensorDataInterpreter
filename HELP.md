@@ -20,13 +20,13 @@ The **Sensor Data Interpreter** is a Spring Boot application designed to process
         - Use MongoDB Compass or similar tools to manage the database:
             - Host: `localhost`
             - Port: `27017`
-            - Database: `sensorOperationalDB`
-            - Conn URL: `mongodb://localhost:27017/sensorOperationalDB`
+            - Database: `sensorStatisticalDB`
+            - Conn URL: `mongodb://localhost:27017/sensorStatisticalDB`
             - Collection: `sensor_status_changes`
 
 - **ActiveMQ**: Central message queue for asynchronous communication.
     - Configured to use the `vm://localhost` broker.
-    - It in not persistent by default, but can be configured to be persistent.
+    - It is not persistent by default, but can be configured to be persistent.
   
 - **Swagger UI**: API documentation and testing interface.
     - Accessed at `http://localhost:8080/swagger-ui` (if using the default port).
@@ -36,39 +36,6 @@ The **Sensor Data Interpreter** is a Spring Boot application designed to process
 ## Prerequisites
 - Java 17 or higher
 - Maven 3.8 or higher
-- MongoDB installed locally (if not using embedded MongoDB)
 
 ## Configuration
-The application uses the following configuration properties:
-
-### `application.properties`
-```ini
-# Application Name
-spring.application.name=SensorDataInterpreter
-
-# ActiveMQ Configuration
-spring.activemq.broker-url=vm://localhost?broker.persistent=true
-spring.activemq.packages.trust-all=true
-sensor.queue.name=central-message-queue
-
-# H2 Database Configuration
-spring.datasource.url=jdbc:h2:file:./data/sensorOperationalDB
-spring.datasource.driverClassName=org.h2.Driver
-spring.datasource.username=**********
-spring.datasource.password=**********
-spring.jpa.hibernate.ddl-auto=update
-spring.h2.console.enabled=true
-spring.h2.console.path=/h2-console
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-
-# MongoDB Configuration
-spring.data.mongodb.port=27017
-spring.data.mongodb.database=sensorOperationalDB
-spring.data.mongodb.host=localhost
-de.flapdoodle.mongodb.embedded.version=6.0.5
-
-# Swagger UI
-springdoc.swagger-ui.path=/swagger-ui
-
-# Metrics
-management.endpoints.web.exposure.include=actuator,health,metrics,prometheus
+The application uses `application.properties` for configuration management.
